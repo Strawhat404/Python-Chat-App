@@ -8,11 +8,19 @@ const message = document.getElementById('message');
 
 socket.on('message',(data) => {
     const li = document.createElement('li');
-    li.textContent -= data;
+    li.textContent = data;
     message.appendChild(li);
     message.scrollTop = message.scrollHeight;
 }
 );
+socket.on('connect', () => {
+    console.log('Connected to server');
+});
+
+socket.on('connect', () => {
+    console.log('Connected to server');
+});
+
 //so to handle the message submission
 
 form.addEventListener('submit',(event) => {
