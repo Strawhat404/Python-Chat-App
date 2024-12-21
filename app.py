@@ -11,3 +11,16 @@ def home():
 
 if __name__ == '__main__':
     socketio.run(app,debug=True)
+
+@socketio.on('connect')
+def handle_connect():
+    print('A user connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('A user diconnected..')
+
+@socketio.on('message')
+def handle_message(data):
+    print(f'Received message: {data}')
+    socketio.send(data,broadcast=True)

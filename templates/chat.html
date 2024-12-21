@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale">
+        <title>Chat App</title>
+        <link rel ="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+
+<body>
+    <div id="chat-container">
+        <ul id="message"></ul>
+        <form id="chat-form">
+            <input id="message-input type" type="text" placeholder="type a message..." autocomplete="off"/>
+            <button type = "submit">Send</button>
+        </form>
+    </div>
+    <script src = "https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <script src ="{{url_for('static',filename='chat.js')}}"
+</body>
