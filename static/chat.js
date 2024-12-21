@@ -1,33 +1,28 @@
-const socket = io()
+const socket = io();
 
-const form = document.getElementById('chat-form');
-const input = document.getElementById('message-input');
-const message = document.getElementById('message');
+socket.on('connect', () => {
+    console.log('Connected to the server');
+});
 
-//so to listen to an incoming message
-
-socket.on('message',(data) => {
+socket.on('message', (data) => {
+    console.log('Received message:', data);
     const li = document.createElement('li');
     li.textContent = data;
-    message.appendChild(li);
-    message.scrollTop = message.scrollHeight;
-}
-);
-socket.on('connect', () => {
-    console.log('Connected to server');
+    document.getElementById('message').appendChild(li);
+    document.getElementById('message').scrollTop = document.getElementById('message').scrollHeight;
 });
 
-socket.on('connect', () => {
-    console.log('Connected to server');
+// Ensure the DOM is fully loaded before attaching event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('message-input');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const message = input.value;
+        if (message.trim()) {
+            socket.send(message);
+            input.value = '';  // Clear the input after sending
+        }
+    });
 });
-
-//so to handle the message submission
-
-form.addEventListener('submit',(event) => {
-    event.preventDefault();
-    const message = input.value;
-    if (message.trim()){
-        socket.send(message);
-        input.value = '';
-    }
-}); 
